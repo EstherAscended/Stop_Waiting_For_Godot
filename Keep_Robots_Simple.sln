@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keep_Robots_Simple", "Keep_Robots_Simple.csproj", "{33D3E633-8C08-4AA6-9F9A-665729C0FFDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33D3E633-8C08-4AA6-9F9A-665729C0FFDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D3E633-8C08-4AA6-9F9A-665729C0FFDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D3E633-8C08-4AA6-9F9A-665729C0FFDA}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{33D3E633-8C08-4AA6-9F9A-665729C0FFDA}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{33D3E633-8C08-4AA6-9F9A-665729C0FFDA}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{33D3E633-8C08-4AA6-9F9A-665729C0FFDA}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
