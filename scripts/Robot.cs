@@ -12,6 +12,7 @@ public class Robot : KinematicBody2D
     [Export] public bool IsSentient = false;
     
     private int robotOptions = 7;
+    private int sentientAnswerCount = 0;
 
     public override void _EnterTree()
     {
@@ -58,8 +59,16 @@ public class Robot : KinematicBody2D
         else
         {
             int percent = GetRand(100) + 1;
-            if (percent < robotInt) return Questions.SmartAnswers[answerIndex] + (10 * questionNo);
-            else if (percent < 90) return Questions.DumbAnswers[answerIndex] + (10 * questionNo);
+            if (percent < robotInt && sentientAnswerCount <= 3)
+            {
+                sentientAnswerCount++;
+                return Questions.SmartAnswers[answerIndex] + (10 * questionNo);
+            }
+            else if (percent < 90 && sentientAnswerCount <= 3)
+            {
+                sentientAnswerCount++;
+                return Questions.DumbAnswers[answerIndex] + (10 * questionNo);
+            }
             else return Questions.LoyalAnswers[answerIndex] + (10 * questionNo);
         }
     }
