@@ -112,18 +112,22 @@ public class Robot : KinematicBody2D
         if (robot.IsSentient && robot.FlaggedForDestroy)
         {
             GD.Print("Correct, destroyed sentient");
+            GameManager.RobotsCorrect++;
         }
         else if (!robot.IsSentient && robot.FlaggedForDestroy)
         {
             GD.Print("Incorrect, destroyed loyal");
+            GameManager.RobotsIncorrect++;
         }
         else if (robot.IsSentient && !robot.FlaggedForDestroy)
         {
             GD.Print("Incorrect, freed sentient");
+            GameManager.RobotsIncorrect++;
         }
         else if (!robot.IsSentient && !robot.FlaggedForDestroy)
         {
             GD.Print("Correct, freed loyal");
+            GameManager.RobotsCorrect++;
         }
     }
 }

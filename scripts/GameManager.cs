@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 
 public class GameManager : Node
 {
@@ -9,6 +10,8 @@ public class GameManager : Node
     public PackedScene Robot = GD.Load<PackedScene>("res://scenes/robots/Robot.tscn");
     public PackedScene SentientRobot = GD.Load<PackedScene>("res://scenes/robots/SentientRobot.tscn");
     public Robot CurrentRobot;
+    public static int RobotsCorrect, RobotsIncorrect = 0;
+    private Label correctLabel, incorrectLabel;
 
     private int nextRobotIndex = 0;
     
@@ -23,6 +26,16 @@ public class GameManager : Node
     public override void _Ready()
     {
        CurrentRobot = LoadNextRobot();
+       GameManager.RobotsCorrect = 0;
+       GameManager.RobotsIncorrect = 0;
+       correctLabel = GetNode<Label>("../Panel/CorrectLabel");
+       incorrectLabel = GetNode<Label>("../Panel/IncorrectLabel");
+    }
+
+    public override void _Process(float delta)
+    {
+        correctLabel.Text = GameManager.RobotsCorrect.ToString();
+        incorrectLabel.Text = GameManager.RobotsIncorrect.ToString();
     }
 
     private void LoadRobots()
