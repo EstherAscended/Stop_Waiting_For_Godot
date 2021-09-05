@@ -13,6 +13,8 @@ public class Robot : KinematicBody2D
     
     private int robotOptions = 7;
     private int sentientAnswerCount = 0;
+    
+    private RandomNumberGenerator rand = new RandomNumberGenerator();
 
     public override void _EnterTree()
     {
@@ -33,6 +35,13 @@ public class Robot : KinematicBody2D
         for (int i = 0; i < Answers.Length; i++)
         {
             Answers[i] = ChooseAnswer(RobotInt, i);
+        }
+
+
+        foreach (var answer in Answers)
+        {
+            GD.Print(RobotInt);
+            GD.Print(answer); 
         }
     }
 
@@ -55,26 +64,27 @@ public class Robot : KinematicBody2D
     private string ChooseAnswer(int robotInt, int questionNo)
     {
         int answerIndex = GetRand(10);
-        if (robotInt < 40) return Questions.LoyalAnswers[answerIndex] + (10 * questionNo);
+        if (robotInt < 40) return Questions.LoyalAnswers[answerIndex + (10 * questionNo)];
         else
         {
             int percent = GetRand(100) + 1;
             if (percent < robotInt && sentientAnswerCount <= 3)
             {
                 sentientAnswerCount++;
-                return Questions.SmartAnswers[answerIndex] + (10 * questionNo);
+                return Questions.SmartAnswers[answerIndex + (10 * questionNo)];
             }
             else if (percent < 90 && sentientAnswerCount <= 3)
             {
                 sentientAnswerCount++;
-                return Questions.DumbAnswers[answerIndex] + (10 * questionNo);
+                return Questions.DumbAnswers[answerIndex + (10 * questionNo)];
             }
-            else return Questions.LoyalAnswers[answerIndex] + (10 * questionNo);
+            else return Questions.LoyalAnswers[answerIndex + (10 * questionNo)];
         }
     }
 
     private int GetRand(int n)
     {
-        return (int)GD.Randi() % n;
+        GameManager.Rand.Randomize();
+        return GameManager.Rand.RandiRange(0, n - 1);
     }
 }
