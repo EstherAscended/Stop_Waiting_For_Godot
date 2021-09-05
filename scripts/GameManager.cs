@@ -8,6 +8,9 @@ public class GameManager : Node
     public PackedScene[] RobotsForGame = new PackedScene[30];
     public PackedScene Robot = GD.Load<PackedScene>("res://scenes/robots/Robot.tscn");
     public PackedScene SentientRobot = GD.Load<PackedScene>("res://scenes/robots/SentientRobot.tscn");
+    public Robot CurrentRobot;
+
+    private int nextRobotIndex = 0;
     
     [Export] public int SentientRobotsInGame = 10;
     
@@ -19,6 +22,7 @@ public class GameManager : Node
 
     public override void _Ready()
     {
+       CurrentRobot = LoadNextRobot();
     }
 
     private void LoadRobots()
@@ -26,6 +30,7 @@ public class GameManager : Node
         var sentientIndexes = new List<int>();
         for (int i = 0; i < SentientRobotsInGame; i++)
         {
+            Rand.Randomize();
             int rand = Rand.RandiRange(0, RobotsForGame.Length - 1);
             if (!sentientIndexes.Contains(rand))
             {
@@ -44,8 +49,14 @@ public class GameManager : Node
             {
                 RobotsForGame[i] = Robot;
             }
-
         }
+    }
+
+    public Robot LoadNextRobot()
+    {
+        Robot rob = RobotsForGame[nextRobotIndex].Instance<Robot>();
+        if (nextRobotIndex < RobotsForGame.Length - 1) nextRobotIndex++;
+        return rob;
     }
 
     public async void DelayTimer(float time)

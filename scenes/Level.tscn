@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/background/desk.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/background/back.png" type="Texture" id=2]
 [ext_resource path="res://scripts/GameManager.cs" type="Script" id=3]
 [ext_resource path="res://scripts/Desk.cs" type="Script" id=4]
+[ext_resource path="res://scripts/RobotStopper.cs" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.25574, 170.494 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,57 +24,108 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+margin_left = 19.0
+margin_top = -877.0
+margin_right = 1939.0
+margin_bottom = 203.0
+texture = ExtResource( 2 )
+
 [node name="Desk" type="TextureRect" parent="Panel"]
 margin_left = 19.0
-margin_top = -56.0
+margin_top = -752.0
 margin_right = 1939.0
-margin_bottom = 344.0
+margin_bottom = 328.0
 texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Q0" type="Button" parent="Panel/Desk"]
-margin_left = 9.38699
-margin_top = 248.828
-margin_right = 311.387
-margin_bottom = 321.828
+margin_left = 12.387
+margin_top = 926.828
+margin_right = 314.387
+margin_bottom = 999.828
 text = "What is your favourite hobby?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Q1" type="Button" parent="Panel/Desk"]
-margin_left = 328.62
-margin_top = 248.828
-margin_right = 630.62
-margin_bottom = 321.828
+margin_left = 331.62
+margin_top = 926.828
+margin_right = 633.62
+margin_bottom = 999.828
 text = "How do you feel about work?"
 
 [node name="Q2" type="Button" parent="Panel/Desk"]
-margin_left = 643.235
-margin_top = 248.828
-margin_right = 945.235
-margin_bottom = 321.828
+margin_left = 646.235
+margin_top = 926.828
+margin_right = 948.235
+margin_bottom = 999.828
 text = "Are you planning a robot rebellion?"
 
 [node name="Q3" type="Button" parent="Panel/Desk"]
-margin_left = 964.969
-margin_top = 248.828
-margin_right = 1266.97
-margin_bottom = 321.828
+margin_left = 967.969
+margin_top = 926.828
+margin_right = 1269.97
+margin_bottom = 999.828
 text = "When is your birthday?"
 
 [node name="Q4" type="Button" parent="Panel/Desk"]
-margin_left = 1282.46
-margin_top = 248.828
-margin_right = 1584.46
-margin_bottom = 321.828
+margin_left = 1285.46
+margin_top = 926.828
+margin_right = 1587.46
+margin_bottom = 999.828
 text = "What is your main ambition?"
 
 [node name="Q5" type="Button" parent="Panel/Desk"]
-margin_left = 1606.32
-margin_top = 248.828
-margin_right = 1908.32
-margin_bottom = 321.828
+margin_left = 1609.32
+margin_top = 926.828
+margin_right = 1911.32
+margin_bottom = 999.828
 text = "Can robots feel love?"
+
+[node name="FreeButton" type="Button" parent="Panel/Desk"]
+margin_left = 786.665
+margin_top = 781.841
+margin_right = 933.665
+margin_bottom = 845.841
+text = "Free"
+
+[node name="DestroyButton" type="Button" parent="Panel/Desk"]
+margin_left = 1022.63
+margin_top = 781.841
+margin_right = 1169.63
+margin_bottom = 845.841
+text = "Destroy"
+
+[node name="Start" type="Button" parent="Panel/Desk"]
+margin_left = 860.509
+margin_top = 40.9344
+margin_right = 1070.51
+margin_bottom = 97.9344
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnchorPoints" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="RobotSpawn" type="Node2D" parent="AnchorPoints"]
+position = Vector2( -19, 290.293 )
+
+[node name="RobotCenter" type="Node2D" parent="AnchorPoints"]
+position = Vector2( 967.969, 290.293 )
+
+[node name="Area2D" type="Area2D" parent="AnchorPoints/RobotCenter"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnchorPoints/RobotCenter/Area2D"]
+shape = SubResource( 1 )
+
+[node name="RobotDespawn" type="Node2D" parent="AnchorPoints"]
+position = Vector2( 1996.71, 290.293 )
 
 [connection signal="button_down" from="Panel/Desk/Q0" to="Panel" method="OnQuestion0"]
 [connection signal="button_down" from="Panel/Desk/Q1" to="Panel" method="OnQuestion1"]
@@ -77,3 +133,7 @@ text = "Can robots feel love?"
 [connection signal="button_down" from="Panel/Desk/Q3" to="Panel" method="OnQuestion3"]
 [connection signal="button_down" from="Panel/Desk/Q4" to="Panel" method="OnQuestion4"]
 [connection signal="button_down" from="Panel/Desk/Q5" to="Panel" method="OnQuestion5"]
+[connection signal="button_down" from="Panel/Desk/FreeButton" to="Panel" method="OnRobotFree"]
+[connection signal="button_down" from="Panel/Desk/DestroyButton" to="Panel" method="OnRobotDestroy"]
+[connection signal="button_down" from="Panel/Desk/Start" to="Panel" method="OnStart"]
+[connection signal="area_entered" from="AnchorPoints/RobotCenter/Area2D" to="AnchorPoints" method="RobotEntered"]

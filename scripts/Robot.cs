@@ -7,12 +7,14 @@ public class Robot : KinematicBody2D
     public Sprite RobotBody;
     public int RobotInt = 0;
     public string[] Answers = new string[6];
+    public bool CanRobotMove = true;
     
     //Whether or not a robot is sentient will be determined by loading the Robot or SentientRobot scene
     [Export] public bool IsSentient = false;
     
     private int robotOptions = 7;
     private int sentientAnswerCount = 0;
+    private Node2D spawnPos, centerPos, despawnPos;
     
     private RandomNumberGenerator rand = new RandomNumberGenerator();
 
@@ -25,6 +27,11 @@ public class Robot : KinematicBody2D
     
     public override void _Ready()
     {
+        spawnPos = GetNode<Node2D>("../AnchorPoints/RobotSpawn");
+        centerPos = GetNode<Node2D>("../AnchorPoints/RobotCenter");
+        despawnPos = GetNode<Node2D>("../AnchorPoints/RobotDespawn");
+        Position = spawnPos.Position;
+        
         if (IsSentient)
         {
             //set intelligence between 41 and 100 
@@ -37,18 +44,15 @@ public class Robot : KinematicBody2D
             Answers[i] = ChooseAnswer(RobotInt, i);
         }
 
-
-        foreach (var answer in Answers)
-        {
-            GD.Print(RobotInt);
-            GD.Print(answer); 
-        }
     }
 
     public override void _Process(float delta)
-   {
-      
-   }
+    {
+        if (CanRobotMove)
+        {
+            this.Position = Lerp(spawnPos.Position, centerPos.Position, delta);
+        } 
+    }
 
     private void GenerateRobot()
     {
@@ -82,9 +86,23 @@ public class Robot : KinematicBody2D
         }
     }
 
+    public async void DestroyRobot(float time)
+    {
+        await ToSignal(GetTree().CreateTimer(time), "timeout");
+        GD.Print("Destroyed: " + this.Name);
+        QueueFree();
+    }
+
     private int GetRand(int n)
     {
         GameManager.Rand.Randomize();
         return GameManager.Rand.RandiRange(0, n - 1);
+    }
+    
+    private Vector2 Lerp(Vector2 firstVector, Vector2 secondVector, float delta)
+    {
+        Vector2 direction = firstVector.DirectionTo(secondVector);
+        Vector2 movement = direction * 500 * delta;
+        return this.Position + movement;
     }
 }
