@@ -103,7 +103,7 @@ public class Robot : KinematicBody2D
     private Vector2 Lerp(Vector2 firstVector, Vector2 secondVector, float delta)
     {
         Vector2 direction = firstVector.DirectionTo(secondVector);
-        Vector2 movement = direction * 500 * delta;
+        Vector2 movement = direction * 1000 * delta;
         return this.Position + movement;
     }
 

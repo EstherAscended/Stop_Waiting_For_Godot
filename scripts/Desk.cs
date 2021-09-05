@@ -4,20 +4,24 @@ using System;
 public class Desk : Panel
 {
     private GameManager gameManager;
+    private AnimatedSprite belt;
     public override void _Ready()
     {
         gameManager = GetTree().Root.GetNode<Node2D>("Node2D").GetNode<GameManager>("GameManager");
+        belt = GetNode<AnimatedSprite>("Belt");
     }
 
     public void OnRobotFree()
     {
         GD.Print("free");
+        belt.Play();
         gameManager.CurrentRobot.FlaggedForDestroy = false;
         gameManager.CurrentRobot.CanRobotMove = true;
     }
     public void OnRobotDestroy()
     {
         GD.Print("destroy");
+        belt.Play();
         gameManager.CurrentRobot.FlaggedForDestroy = true;
         gameManager.CurrentRobot.CanRobotMove = true;  
     }
@@ -61,5 +65,6 @@ public class Desk : Panel
     public void OnStart()
     {
         GetTree().Root.GetNode<Node2D>("Node2D").AddChild(gameManager.CurrentRobot);
+        belt.Play("default");
     }
 }
