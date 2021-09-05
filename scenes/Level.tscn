@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/background/desk.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/background/back.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3.25574, 170.494 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.5061, 325.875 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -127,6 +130,12 @@ shape = SubResource( 1 )
 [node name="RobotDespawn" type="Node2D" parent="AnchorPoints"]
 position = Vector2( 1996.71, 290.293 )
 
+[node name="Area2D" type="Area2D" parent="AnchorPoints/RobotDespawn"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnchorPoints/RobotDespawn/Area2D"]
+position = Vector2( 53.3936, 0 )
+shape = SubResource( 2 )
+
 [connection signal="button_down" from="Panel/Desk/Q0" to="Panel" method="OnQuestion0"]
 [connection signal="button_down" from="Panel/Desk/Q1" to="Panel" method="OnQuestion1"]
 [connection signal="button_down" from="Panel/Desk/Q2" to="Panel" method="OnQuestion2"]
@@ -137,3 +146,4 @@ position = Vector2( 1996.71, 290.293 )
 [connection signal="button_down" from="Panel/Desk/DestroyButton" to="Panel" method="OnRobotDestroy"]
 [connection signal="button_down" from="Panel/Desk/Start" to="Panel" method="OnStart"]
 [connection signal="area_entered" from="AnchorPoints/RobotCenter/Area2D" to="AnchorPoints" method="RobotEntered"]
+[connection signal="area_entered" from="AnchorPoints/RobotDespawn/Area2D" to="AnchorPoints" method="OnEnterDespawn"]

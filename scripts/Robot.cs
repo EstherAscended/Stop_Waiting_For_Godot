@@ -8,6 +8,7 @@ public class Robot : KinematicBody2D
     public int RobotInt = 0;
     public string[] Answers = new string[6];
     public bool CanRobotMove = true;
+    public bool FlaggedForDestroy = false;
     
     //Whether or not a robot is sentient will be determined by loading the Robot or SentientRobot scene
     [Export] public bool IsSentient = false;
@@ -86,7 +87,7 @@ public class Robot : KinematicBody2D
         }
     }
 
-    public async void DestroyRobot(float time)
+    public async void DespawnRobot(float time)
     {
         await ToSignal(GetTree().CreateTimer(time), "timeout");
         GD.Print("Destroyed: " + this.Name);
@@ -104,5 +105,25 @@ public class Robot : KinematicBody2D
         Vector2 direction = firstVector.DirectionTo(secondVector);
         Vector2 movement = direction * 500 * delta;
         return this.Position + movement;
+    }
+
+    public static void ResolveButtonDecision(Robot robot)
+    {
+        if (robot.IsSentient && robot.FlaggedForDestroy)
+        {
+            GD.Print("Correct, destroyed sentient");
+        }
+        else if (!robot.IsSentient && robot.FlaggedForDestroy)
+        {
+            GD.Print("Incorrect, destroyed loyal");
+        }
+        else if (robot.IsSentient && !robot.FlaggedForDestroy)
+        {
+            GD.Print("Incorrect, freed sentient");
+        }
+        else if (!robot.IsSentient && !robot.FlaggedForDestroy)
+        {
+            GD.Print("Correct, freed loyal");
+        }
     }
 }

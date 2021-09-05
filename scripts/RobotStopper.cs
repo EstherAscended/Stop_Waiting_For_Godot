@@ -13,6 +13,13 @@ public class RobotStopper : Node
     public void RobotEntered(Area2D area)
     {
         gameManager.CurrentRobot.CanRobotMove = false;
-        GD.Print("entered");
+    }
+
+    public void OnEnterDespawn(Area2D area)
+    {
+        GD.Print("Despawn entered");
+        Robot.ResolveButtonDecision(gameManager.CurrentRobot);
+        gameManager.CurrentRobot.DespawnRobot(1f);
+        gameManager.CurrentRobot = gameManager.LoadNextRobot();
     }
 }

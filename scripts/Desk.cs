@@ -12,12 +12,14 @@ public class Desk : Panel
     public void OnRobotFree()
     {
         GD.Print("free");
+        gameManager.CurrentRobot.FlaggedForDestroy = false;
+        gameManager.CurrentRobot.CanRobotMove = true;
     }
     public void OnRobotDestroy()
     {
         GD.Print("destroy");
-        gameManager.CurrentRobot.DestroyRobot(3f);
-        gameManager.CurrentRobot = gameManager.LoadNextRobot();
+        gameManager.CurrentRobot.FlaggedForDestroy = true;
+        gameManager.CurrentRobot.CanRobotMove = true;  
     }
 
     public void OnQuestion0()
