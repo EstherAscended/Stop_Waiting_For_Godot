@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/sprites/background/desk.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/background/background.png" type="Texture" id=2]
@@ -12,8 +12,24 @@
 [ext_resource path="res://assets/sprites/background/belt/belt2.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/background/belt/belt0.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/background/lighting.png" type="Texture" id=12]
+[ext_resource path="res://scenes/MusicManager.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/fonts/BoldNumber.tres" type="DynamicFont" id=14]
+[ext_resource path="res://assets/sprites/crusher/crush1.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/crusher/crush2.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/crusher/crush3.png" type="Texture" id=17]
+[ext_resource path="res://assets/sprites/crusher/crush0.png" type="Texture" id=18]
+[ext_resource path="res://assets/sfx/crusher.ogg" type="AudioStream" id=19]
+[ext_resource path="res://assets/sfx/belt.ogg" type="AudioStream" id=20]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 18 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "default",
+"speed": 24.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 11 ), ExtResource( 7 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 11 ) ],
 "loop": false,
@@ -21,16 +37,18 @@ animations = [ {
 "speed": 14.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 6.24316, 170.494 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 4.5061, 325.875 )
 
 [node name="Node2D" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="MusicManager" parent="." instance=ExtResource( 13 )]
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = -19.0
@@ -58,6 +76,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Crusher" type="AnimatedSprite" parent="Panel/DoorsNode"]
+position = Vector2( 961.612, 458.747 )
+scale = Vector2( 1.20721, 1 )
+frames = SubResource( 1 )
+
+[node name="CrushSound" type="AudioStreamPlayer" parent="Panel/DoorsNode/Crusher"]
+stream = ExtResource( 19 )
+
 [node name="Background" type="TextureRect" parent="Panel"]
 modulate = Color( 0.486275, 0.537255, 0.486275, 1 )
 margin_left = 19.0
@@ -66,15 +92,19 @@ margin_right = 1939.0
 margin_bottom = 328.0
 texture = ExtResource( 2 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Belt" type="AnimatedSprite" parent="Panel"]
 position = Vector2( 986.969, -211.458 )
-frames = SubResource( 3 )
+frames = SubResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="BeltSound" type="AudioStreamPlayer" parent="Panel/Belt"]
+stream = ExtResource( 20 )
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
 modulate = Color( 1, 1, 1, 0.2 )
@@ -168,20 +198,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CorrectLabel" type="Label" parent="Panel"]
-margin_left = 350.62
+[node name="IncorrectLabel" type="Label" parent="Panel"]
+margin_left = 418.886
 margin_top = -711.066
-margin_right = 489.62
-margin_bottom = -635.066
+margin_right = 532.886
+margin_bottom = -620.066
+custom_fonts/font = ExtResource( 14 )
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="IncorrectLabel" type="Label" parent="Panel"]
+[node name="CorrectLabel" type="Label" parent="Panel"]
 margin_left = 1466.69
 margin_top = -711.066
 margin_right = 1605.69
 margin_bottom = -635.066
+custom_fonts/font = ExtResource( 14 )
 text = "0"
 align = 1
 valign = 1
@@ -204,16 +239,17 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnchorPoints/RobotCenter/Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="RobotDespawn" type="Node2D" parent="AnchorPoints"]
 position = Vector2( 1996.71, 290.293 )
 
 [node name="Area2D" type="Area2D" parent="AnchorPoints/RobotDespawn"]
+position = Vector2( 893.783, 2.82849 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnchorPoints/RobotDespawn/Area2D"]
-position = Vector2( 53.3936, 161.038 )
-shape = SubResource( 2 )
+position = Vector2( 593.298, 148.691 )
+shape = SubResource( 4 )
 
 [connection signal="button_down" from="Panel/Desk/Q0" to="Panel" method="OnQuestion0"]
 [connection signal="button_down" from="Panel/Desk/Q1" to="Panel" method="OnQuestion1"]

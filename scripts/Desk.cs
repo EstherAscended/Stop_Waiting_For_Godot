@@ -4,26 +4,35 @@ using System;
 public class Desk : Panel
 {
     private GameManager gameManager;
-    private AnimatedSprite belt;
+    private AnimatedSprite belt, crusher;
+    private AudioStreamPlayer beltSound, crushSound;
+    private Texture crushedRobot;
     public override void _Ready()
     {
         gameManager = GetTree().Root.GetNode<Node2D>("Node2D").GetNode<GameManager>("GameManager");
         belt = GetNode<AnimatedSprite>("Belt");
+        beltSound = belt.GetNode<AudioStreamPlayer>("BeltSound");
+        crusher = GetNode<AnimatedSprite>("DoorsNode/Crusher");
+        crushSound = crusher.GetNode<AudioStreamPlayer>("CrushSound");
+        crushedRobot = GD.Load<Texture>("res://assets/sprites/robot/crush.png");
     }
 
     public void OnRobotFree()
     {
         GD.Print("free");
         belt.Play();
+        beltSound.Play();
         gameManager.CurrentRobot.FlaggedForDestroy = false;
         gameManager.CurrentRobot.CanRobotMove = true;
     }
     public void OnRobotDestroy()
     {
         GD.Print("destroy");
-        belt.Play();
         gameManager.CurrentRobot.FlaggedForDestroy = true;
-        gameManager.CurrentRobot.CanRobotMove = true;  
+        CrushRobotThenMove(1f);
+        gameManager.CurrentRobot.RobotBody.Texture = crushedRobot;
+        gameManager.CurrentRobot.RobotHead.Texture = null;
+        crusher.Frame = 0;
     }
 
     public void OnQuestion0()
@@ -64,7 +73,24 @@ public class Desk : Panel
 
     public void OnStart()
     {
+        SpawnFirstRobot(1f);
+    }
+
+    private async void CrushRobotThenMove(float time)
+    {
+        crusher.Play();
+        crushSound.Play();
+        await ToSignal(GetTree().CreateTimer(time), "timeout");
+        belt.Play();
+        beltSound.Play();
+        gameManager.CurrentRobot.CanRobotMove = true;
+    }
+
+    private async void SpawnFirstRobot(float time)
+    {
+        await ToSignal(GetTree().CreateTimer(time), "timeout");
         GetTree().Root.GetNode<Node2D>("Node2D").AddChild(gameManager.CurrentRobot);
         belt.Play("default");
+        beltSound.Play();
     }
 }

@@ -123,6 +123,7 @@ public class Robot : KinematicBody2D
         {
             GD.Print("Incorrect, freed sentient");
             GameManager.RobotsIncorrect++;
+            GameManager.SentientRobotsFreed++;
         }
         else if (!robot.IsSentient && !robot.FlaggedForDestroy)
         {

@@ -5,11 +5,13 @@ public class RobotStopper : Node
 {
     private GameManager gameManager;
     private AnimatedSprite belt;
+    private AudioStreamPlayer beltSound;
     
     public override void _Ready()
     {
         gameManager = GetTree().Root.GetNode<Node2D>("Node2D").GetNode<GameManager>("GameManager");
         belt = GetNode<AnimatedSprite>("../Panel/Belt");
+        beltSound = belt.GetNode<AudioStreamPlayer>("BeltSound");
     }
 
     public void RobotEntered(Area2D area)
@@ -27,5 +29,8 @@ public class RobotStopper : Node
         Robot.ResolveButtonDecision(gameManager.CurrentRobot);
         gameManager.CurrentRobot.DespawnRobot(1f);
         gameManager.CurrentRobot = gameManager.LoadNextRobot();
+        GetTree().Root.GetNode<Node2D>("Node2D").AddChild(gameManager.CurrentRobot);
+        belt.Play("default");
+        beltSound.Play();
     }
 }

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/robot3.ogg-ae8d7e399bc9478982be2aec6dc7aec0.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/robot/robot3.ogg"
+dest_files=[ "res://.import/robot3.ogg-ae8d7e399bc9478982be2aec6dc7aec0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
