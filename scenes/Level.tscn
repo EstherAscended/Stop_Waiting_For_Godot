@@ -296,11 +296,13 @@ __meta__ = {
 }
 
 [node name="Start" type="Button" parent="Panel/Desk"]
-margin_left = 860.509
-margin_top = 40.9344
-margin_right = 1070.51
-margin_bottom = 97.9344
-text = "Start"
+margin_left = 858.621
+margin_top = 239.148
+margin_right = 1068.62
+margin_bottom = 296.148
+custom_fonts/font = ExtResource( 14 )
+text = "START"
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

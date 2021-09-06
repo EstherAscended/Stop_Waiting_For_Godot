@@ -7,6 +7,8 @@ public class Desk : Panel
     private AnimatedSprite belt, crusher;
     private AudioStreamPlayer beltSound, crushSound, qSound, buttonSound;
     private Texture crushedRobot;
+    private PackedScene speechBubble;
+    private Button startButton;
     public bool CanPressButton = false;
     public override void _Ready()
     {
@@ -18,6 +20,8 @@ public class Desk : Panel
         crushedRobot = GD.Load<Texture>("res://assets/sprites/robot/crush.png");
         qSound = GetNode<AudioStreamPlayer>("Desk/QSound");
         buttonSound = GetNode<AudioStreamPlayer>("Desk/ButtonSound");
+        startButton = GetNode<Button>("Desk/Start");
+        speechBubble = GD.Load<PackedScene>("res://scenes/Speech.tscn");
     }
 
     public void OnRobotFree()
@@ -52,7 +56,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-           qSound.Play(); 
+            HandleAfterPress(0);
         }
         GD.Print("0");
         GD.Print(gameManager.CurrentRobot.Answers[0]);
@@ -62,7 +66,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-           qSound.Play(); 
+           HandleAfterPress(1);
         }
         GD.Print("1");
         GD.Print(gameManager.CurrentRobot.Answers[1]);
@@ -72,7 +76,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-           qSound.Play(); 
+           HandleAfterPress(2);
         }
         GD.Print("2");
         GD.Print(gameManager.CurrentRobot.Answers[2]);
@@ -82,7 +86,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-           qSound.Play(); 
+           HandleAfterPress(3);
         }
         GD.Print("3");
         GD.Print(gameManager.CurrentRobot.Answers[3]);
@@ -92,7 +96,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-           qSound.Play(); 
+           HandleAfterPress(4);
         }
         GD.Print("4");
         GD.Print(gameManager.CurrentRobot.Answers[4]);
@@ -102,7 +106,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-           qSound.Play(); 
+           HandleAfterPress(5);
         }
         GD.Print("5");
         GD.Print(gameManager.CurrentRobot.Answers[5]);
@@ -111,6 +115,9 @@ public class Desk : Panel
     public void OnStart()
     {
         SpawnFirstRobot(1f);
+        startButton.Disabled = true;
+        startButton.Visible = false;
+        qSound.Play();
     }
 
     private async void CrushRobotThenMove(float time)
@@ -129,5 +136,14 @@ public class Desk : Panel
         GetTree().Root.GetNode<Node2D>("Node2D").AddChild(gameManager.CurrentRobot);
         belt.Play("default");
         beltSound.Play();
+    }
+
+    private void HandleAfterPress(int qIndex)
+    {
+        CanPressButton = false;
+        qSound.Play();
+        Speech qBubble = speechBubble.Instance<Speech>();
+        qBubble.BubbleText = gameManager.CurrentRobot.Answers[qIndex];
+        gameManager.CurrentRobot.AddChild(qBubble);
     }
 }
