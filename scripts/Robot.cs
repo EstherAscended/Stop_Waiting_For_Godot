@@ -117,6 +117,7 @@ public class Robot : KinematicBody2D
             monitorAnim.Play("tick");
             monitorCorrect.Play();
             GameManager.RobotsCorrect++;
+            GameManager.SentientRobotsCrushed++;
         }
         else if (!robot.IsSentient && robot.FlaggedForDestroy)
         {
@@ -124,6 +125,7 @@ public class Robot : KinematicBody2D
             monitorAnim.Play("cross");
             monitorIncorrect.Play();
             GameManager.RobotsIncorrect++;
+            GameManager.LoyalRobotsCrushed++;
         }
         else if (robot.IsSentient && !robot.FlaggedForDestroy)
         {
@@ -139,6 +141,7 @@ public class Robot : KinematicBody2D
             monitorAnim.Play("tick");
             monitorCorrect.Play();
             GameManager.RobotsCorrect++;
+            GameManager.LoyalRobotsFreed++;
         }
     }
 }

@@ -10,7 +10,7 @@ public class GameManager : Node
     public PackedScene Robot = GD.Load<PackedScene>("res://scenes/robots/Robot.tscn");
     public PackedScene SentientRobot = GD.Load<PackedScene>("res://scenes/robots/SentientRobot.tscn");
     public Robot CurrentRobot;
-    public static int RobotsCorrect, RobotsIncorrect, SentientRobotsFreed = 0;
+    public static int RobotsCorrect, RobotsIncorrect, SentientRobotsFreed, SentientRobotsCrushed, LoyalRobotsFreed, LoyalRobotsCrushed = 0;
     private Label correctLabel, incorrectLabel;
 
     private int nextRobotIndex = 0;
@@ -29,6 +29,9 @@ public class GameManager : Node
        GameManager.RobotsCorrect = 0;
        GameManager.RobotsIncorrect = 0;
        GameManager.SentientRobotsFreed = 0;
+       GameManager.SentientRobotsCrushed = 0;
+       GameManager.LoyalRobotsFreed = 0;
+       GameManager.LoyalRobotsCrushed = 0;
        correctLabel = GetNode<Label>("../Panel/CorrectLabel");
        incorrectLabel = GetNode<Label>("../Panel/IncorrectLabel");
     }
@@ -70,6 +73,11 @@ public class GameManager : Node
     {
         Robot rob = RobotsForGame[nextRobotIndex].Instance<Robot>();
         if (nextRobotIndex < RobotsForGame.Length - 1) nextRobotIndex++;
+        else
+        {
+            GD.Print("game ended");
+            GetTree().ChangeScene("res://scenes/EndScene.tscn");
+        }
         return rob;
     }
 

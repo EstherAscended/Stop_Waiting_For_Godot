@@ -11,9 +11,13 @@ config_version=4
 [application]
 
 config/name="Keep_Robots_Simple"
-run/main_scene="res://scenes/Level.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 boot_splash/image="res://assets/misc/splash-screen.png"
 config/icon="res://icon.png"
+
+[autoload]
+
+MusicManager="*res://scenes/MusicManager.tscn"
 
 [display]
 

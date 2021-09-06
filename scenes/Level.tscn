@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://assets/sprites/background/desk.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/background/background.png" type="Texture" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://assets/sprites/background/belt/belt2.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/background/belt/belt0.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/background/lighting.png" type="Texture" id=12]
-[ext_resource path="res://scenes/MusicManager.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/fonts/BoldNumber.tres" type="DynamicFont" id=14]
 [ext_resource path="res://assets/sprites/crusher/crush1.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/crusher/crush2.png" type="Texture" id=16]
@@ -115,8 +114,6 @@ extents = Vector2( 4.5061, 325.875 )
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource( 3 )
-
-[node name="MusicManager" parent="." instance=ExtResource( 13 )]
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = -19.0
