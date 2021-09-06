@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://assets/sprites/background/desk.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/background/background.png" type="Texture" id=2]
@@ -33,6 +33,14 @@
 [ext_resource path="res://assets/sprites/monitor/cross/cross1.png" type="Texture" id=31]
 [ext_resource path="res://assets/sfx/fail.wav" type="AudioStream" id=32]
 [ext_resource path="res://assets/sfx/correct.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/sprites/buttons/destroy.png" type="Texture" id=34]
+[ext_resource path="res://assets/sprites/buttons/free.png" type="Texture" id=35]
+[ext_resource path="res://assets/sprites/buttons/q2.png" type="Texture" id=36]
+[ext_resource path="res://assets/sprites/buttons/q4.png" type="Texture" id=37]
+[ext_resource path="res://assets/sprites/buttons/q3.png" type="Texture" id=38]
+[ext_resource path="res://assets/sprites/buttons/q0.png" type="Texture" id=39]
+[ext_resource path="res://assets/sprites/buttons/q1.png" type="Texture" id=40]
+[ext_resource path="res://assets/sprites/buttons/q5.png" type="Texture" id=41]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -49,6 +57,31 @@ animations = [ {
 "name": "default",
 "speed": 14.0
 } ]
+
+[sub_resource type="StyleBoxFlat" id=10]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=11]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=12]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=13]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=14]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=15]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.0509804, 0.580392, 0.184314, 0.713726 )
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=9]
+draw_center = false
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -161,63 +194,102 @@ __meta__ = {
 }
 
 [node name="Q0" type="Button" parent="Panel/Desk"]
-margin_left = 12.387
-margin_top = 926.828
-margin_right = 314.387
-margin_bottom = 999.828
-text = "What is your favourite hobby?"
+margin_left = -46.0346
+margin_top = 910.221
+margin_right = 546.965
+margin_bottom = 1213.22
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/hover = SubResource( 10 )
+icon = ExtResource( 39 )
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Q1" type="Button" parent="Panel/Desk"]
-margin_left = 331.62
-margin_top = 926.828
-margin_right = 633.62
-margin_bottom = 999.828
-text = "How do you feel about work?"
+margin_left = 280.398
+margin_top = 948.57
+margin_right = 849.398
+margin_bottom = 1209.57
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/hover = SubResource( 11 )
+icon = ExtResource( 40 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Q2" type="Button" parent="Panel/Desk"]
-margin_left = 646.235
-margin_top = 926.828
-margin_right = 948.235
-margin_bottom = 999.828
-text = "Are you planning a robot rebellion?"
+margin_left = 597.194
+margin_top = 925.301
+margin_right = 1215.19
+margin_bottom = 1218.3
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/hover = SubResource( 12 )
+icon = ExtResource( 36 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Q3" type="Button" parent="Panel/Desk"]
-margin_left = 967.969
-margin_top = 926.828
-margin_right = 1269.97
-margin_bottom = 999.828
-text = "When is your birthday?"
+margin_left = 920.189
+margin_top = 948.57
+margin_right = 1527.19
+margin_bottom = 1238.57
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/hover = SubResource( 13 )
+icon = ExtResource( 38 )
+flat = true
 
 [node name="Q4" type="Button" parent="Panel/Desk"]
-margin_left = 1285.46
-margin_top = 926.828
-margin_right = 1587.46
-margin_bottom = 999.828
-text = "What is your main ambition?"
+margin_left = 1246.78
+margin_top = 935.559
+margin_right = 1841.78
+margin_bottom = 1225.56
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/hover = SubResource( 14 )
+icon = ExtResource( 37 )
+flat = true
 
 [node name="Q5" type="Button" parent="Panel/Desk"]
-margin_left = 1609.32
-margin_top = 926.828
-margin_right = 1911.32
-margin_bottom = 999.828
-text = "Can robots feel love?"
+margin_left = 1586.69
+margin_top = 935.559
+margin_right = 2174.69
+margin_bottom = 1222.56
+rect_scale = Vector2( 0.6, 0.6 )
+custom_styles/hover = SubResource( 15 )
+icon = ExtResource( 41 )
+flat = true
 
 [node name="FreeButton" type="Button" parent="Panel/Desk"]
-margin_left = 786.665
-margin_top = 781.841
-margin_right = 933.665
-margin_bottom = 845.841
+margin_left = 729.269
+margin_top = 724.685
+margin_right = 1251.27
+margin_bottom = 949.685
+rect_scale = Vector2( 0.5, 0.5 )
+custom_styles/hover = SubResource( 7 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Free"
+icon = ExtResource( 35 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DestroyButton" type="Button" parent="Panel/Desk"]
-margin_left = 1022.63
-margin_top = 781.841
-margin_right = 1169.63
-margin_bottom = 845.841
+margin_left = 1002.88
+margin_top = 724.685
+margin_right = 1539.88
+margin_bottom = 954.685
+rect_scale = Vector2( 0.5, 0.5 )
+custom_styles/hover = SubResource( 9 )
 text = "Destroy"
+icon = ExtResource( 34 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Start" type="Button" parent="Panel/Desk"]
 margin_left = 860.509
@@ -240,7 +312,7 @@ frames = SubResource( 5 )
 
 [node name="MonitorCorrect" type="AudioStreamPlayer" parent="Panel/Desk/Monitor"]
 stream = ExtResource( 33 )
-volume_db = -8.0
+volume_db = -5.0
 
 [node name="MonitorIncorrect" type="AudioStreamPlayer" parent="Panel/Desk/Monitor"]
 stream = ExtResource( 32 )
