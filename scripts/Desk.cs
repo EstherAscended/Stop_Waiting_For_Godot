@@ -7,6 +7,7 @@ public class Desk : Panel
     private AnimatedSprite belt, crusher;
     private AudioStreamPlayer beltSound, crushSound;
     private Texture crushedRobot;
+    public bool CanPressButton = false;
     public override void _Ready()
     {
         gameManager = GetTree().Root.GetNode<Node2D>("Node2D").GetNode<GameManager>("GameManager");
@@ -19,54 +20,86 @@ public class Desk : Panel
 
     public void OnRobotFree()
     {
-        GD.Print("free");
-        belt.Play();
-        beltSound.Play();
-        gameManager.CurrentRobot.FlaggedForDestroy = false;
-        gameManager.CurrentRobot.CanRobotMove = true;
+        if (CanPressButton)
+        {
+            GD.Print("free");
+            belt.Play();
+            beltSound.Play();
+            gameManager.CurrentRobot.FlaggedForDestroy = false;
+            gameManager.CurrentRobot.CanRobotMove = true;
+            CanPressButton = false;
+        }
     }
     public void OnRobotDestroy()
     {
-        GD.Print("destroy");
-        gameManager.CurrentRobot.FlaggedForDestroy = true;
-        CrushRobotThenMove(1f);
-        gameManager.CurrentRobot.RobotBody.Texture = crushedRobot;
-        gameManager.CurrentRobot.RobotHead.Texture = null;
-        crusher.Frame = 0;
+        if (CanPressButton)
+        {
+            GD.Print("destroy");
+            gameManager.CurrentRobot.FlaggedForDestroy = true;
+            CrushRobotThenMove(1f);
+            gameManager.CurrentRobot.RobotBody.Texture = crushedRobot;
+            gameManager.CurrentRobot.RobotHead.Texture = null;
+            crusher.Frame = 0;
+            CanPressButton = false;
+        }
     }
 
     public void OnQuestion0()
     {
+        if (CanPressButton)
+        {
+            
+        }
         GD.Print("0");
         GD.Print(gameManager.CurrentRobot.Answers[0]);
     }
     
     public void OnQuestion1()
     {
+        if (CanPressButton)
+        {
+            
+        }
         GD.Print("1");
         GD.Print(gameManager.CurrentRobot.Answers[1]);
     }
     
     public void OnQuestion2()
     {
+        if (CanPressButton)
+        {
+            
+        }
         GD.Print("2");
         GD.Print(gameManager.CurrentRobot.Answers[2]);
     }
     
     public void OnQuestion3()
     {
+        if (CanPressButton)
+        {
+            
+        }
         GD.Print("3");
         GD.Print(gameManager.CurrentRobot.Answers[3]);
     }
     
     public void OnQuestion4()
     {
+        if (CanPressButton)
+        {
+            
+        }
         GD.Print("4");
         GD.Print(gameManager.CurrentRobot.Answers[4]);
     }
     
     public void OnQuestion5()
     {
+        if (CanPressButton)
+        {
+            
+        }
         GD.Print("5");
         GD.Print(gameManager.CurrentRobot.Answers[5]);
     }

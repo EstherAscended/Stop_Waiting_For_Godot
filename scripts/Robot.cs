@@ -107,27 +107,35 @@ public class Robot : KinematicBody2D
         return this.Position + movement;
     }
 
-    public static void ResolveButtonDecision(Robot robot)
+    public static void ResolveButtonDecision(Robot robot, AnimatedSprite monitorAnim, AudioStreamPlayer monitorCorrect, AudioStreamPlayer monitorIncorrect)
     {
         if (robot.IsSentient && robot.FlaggedForDestroy)
         {
             GD.Print("Correct, destroyed sentient");
+            monitorAnim.Play("tick");
+            monitorCorrect.Play();
             GameManager.RobotsCorrect++;
         }
         else if (!robot.IsSentient && robot.FlaggedForDestroy)
         {
             GD.Print("Incorrect, destroyed loyal");
+            monitorAnim.Play("cross");
+            monitorIncorrect.Play();
             GameManager.RobotsIncorrect++;
         }
         else if (robot.IsSentient && !robot.FlaggedForDestroy)
         {
             GD.Print("Incorrect, freed sentient");
             GameManager.RobotsIncorrect++;
+            monitorAnim.Play("cross");
+            monitorIncorrect.Play();
             GameManager.SentientRobotsFreed++;
         }
         else if (!robot.IsSentient && !robot.FlaggedForDestroy)
         {
             GD.Print("Correct, freed loyal");
+            monitorAnim.Play("tick");
+            monitorCorrect.Play();
             GameManager.RobotsCorrect++;
         }
     }
