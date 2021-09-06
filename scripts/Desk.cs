@@ -5,7 +5,7 @@ public class Desk : Panel
 {
     private GameManager gameManager;
     private AnimatedSprite belt, crusher;
-    private AudioStreamPlayer beltSound, crushSound;
+    private AudioStreamPlayer beltSound, crushSound, qSound, buttonSound;
     private Texture crushedRobot;
     public bool CanPressButton = false;
     public override void _Ready()
@@ -16,6 +16,8 @@ public class Desk : Panel
         crusher = GetNode<AnimatedSprite>("DoorsNode/Crusher");
         crushSound = crusher.GetNode<AudioStreamPlayer>("CrushSound");
         crushedRobot = GD.Load<Texture>("res://assets/sprites/robot/crush.png");
+        qSound = GetNode<AudioStreamPlayer>("Desk/QSound");
+        buttonSound = GetNode<AudioStreamPlayer>("Desk/ButtonSound");
     }
 
     public void OnRobotFree()
@@ -25,6 +27,7 @@ public class Desk : Panel
             GD.Print("free");
             belt.Play();
             beltSound.Play();
+            buttonSound.Play();
             gameManager.CurrentRobot.FlaggedForDestroy = false;
             gameManager.CurrentRobot.CanRobotMove = true;
             CanPressButton = false;
@@ -36,6 +39,7 @@ public class Desk : Panel
         {
             GD.Print("destroy");
             gameManager.CurrentRobot.FlaggedForDestroy = true;
+            buttonSound.Play();
             CrushRobotThenMove(1f);
             gameManager.CurrentRobot.RobotBody.Texture = crushedRobot;
             gameManager.CurrentRobot.RobotHead.Texture = null;
@@ -48,7 +52,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-            
+           qSound.Play(); 
         }
         GD.Print("0");
         GD.Print(gameManager.CurrentRobot.Answers[0]);
@@ -58,7 +62,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-            
+           qSound.Play(); 
         }
         GD.Print("1");
         GD.Print(gameManager.CurrentRobot.Answers[1]);
@@ -68,7 +72,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-            
+           qSound.Play(); 
         }
         GD.Print("2");
         GD.Print(gameManager.CurrentRobot.Answers[2]);
@@ -78,7 +82,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-            
+           qSound.Play(); 
         }
         GD.Print("3");
         GD.Print(gameManager.CurrentRobot.Answers[3]);
@@ -88,7 +92,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-            
+           qSound.Play(); 
         }
         GD.Print("4");
         GD.Print(gameManager.CurrentRobot.Answers[4]);
@@ -98,7 +102,7 @@ public class Desk : Panel
     {
         if (CanPressButton)
         {
-            
+           qSound.Play(); 
         }
         GD.Print("5");
         GD.Print(gameManager.CurrentRobot.Answers[5]);

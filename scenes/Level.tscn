@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://assets/sprites/background/desk.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/background/background.png" type="Texture" id=2]
@@ -41,6 +41,10 @@
 [ext_resource path="res://assets/sprites/buttons/q0.png" type="Texture" id=39]
 [ext_resource path="res://assets/sprites/buttons/q1.png" type="Texture" id=40]
 [ext_resource path="res://assets/sprites/buttons/q5.png" type="Texture" id=41]
+[ext_resource path="res://assets/sfx/card-putdown.wav" type="AudioStream" id=42]
+[ext_resource path="res://assets/sfx/click.wav" type="AudioStream" id=43]
+[ext_resource path="res://assets/sprites/icon_cross.png" type="Texture" id=44]
+[ext_resource path="res://assets/sprites/icon_tick.png" type="Texture" id=45]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -194,10 +198,10 @@ __meta__ = {
 }
 
 [node name="Q0" type="Button" parent="Panel/Desk"]
-margin_left = -46.0346
-margin_top = 910.221
-margin_right = 546.965
-margin_bottom = 1213.22
+margin_left = -38.0977
+margin_top = 914.189
+margin_right = 554.902
+margin_bottom = 1217.19
 rect_scale = Vector2( 0.6, 0.6 )
 custom_styles/hover = SubResource( 10 )
 icon = ExtResource( 39 )
@@ -207,9 +211,9 @@ __meta__ = {
 }
 
 [node name="Q1" type="Button" parent="Panel/Desk"]
-margin_left = 280.398
+margin_left = 287.542
 margin_top = 948.57
-margin_right = 849.398
+margin_right = 856.542
 margin_bottom = 1209.57
 rect_scale = Vector2( 0.6, 0.6 )
 custom_styles/hover = SubResource( 11 )
@@ -220,10 +224,10 @@ __meta__ = {
 }
 
 [node name="Q2" type="Button" parent="Panel/Desk"]
-margin_left = 597.194
-margin_top = 925.301
-margin_right = 1215.19
-margin_bottom = 1218.3
+margin_left = 604.337
+margin_top = 923.713
+margin_right = 1222.34
+margin_bottom = 1216.71
 rect_scale = Vector2( 0.6, 0.6 )
 custom_styles/hover = SubResource( 12 )
 icon = ExtResource( 36 )
@@ -233,9 +237,9 @@ __meta__ = {
 }
 
 [node name="Q3" type="Button" parent="Panel/Desk"]
-margin_left = 920.189
+margin_left = 921.776
 margin_top = 948.57
-margin_right = 1527.19
+margin_right = 1528.78
 margin_bottom = 1238.57
 rect_scale = Vector2( 0.6, 0.6 )
 custom_styles/hover = SubResource( 13 )
@@ -253,9 +257,9 @@ icon = ExtResource( 37 )
 flat = true
 
 [node name="Q5" type="Button" parent="Panel/Desk"]
-margin_left = 1586.69
+margin_left = 1575.58
 margin_top = 935.559
-margin_right = 2174.69
+margin_right = 2163.58
 margin_bottom = 1222.56
 rect_scale = Vector2( 0.6, 0.6 )
 custom_styles/hover = SubResource( 15 )
@@ -317,11 +321,17 @@ volume_db = -5.0
 [node name="MonitorIncorrect" type="AudioStreamPlayer" parent="Panel/Desk/Monitor"]
 stream = ExtResource( 32 )
 
+[node name="QSound" type="AudioStreamPlayer" parent="Panel/Desk"]
+stream = ExtResource( 42 )
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="Panel/Desk"]
+stream = ExtResource( 43 )
+
 [node name="IncorrectLabel" type="Label" parent="Panel"]
-margin_left = 418.886
-margin_top = -711.066
-margin_right = 532.886
-margin_bottom = -620.066
+margin_left = 400.0
+margin_top = -700.0
+margin_right = 514.0
+margin_bottom = -609.0
 custom_fonts/font = ExtResource( 14 )
 text = "0"
 align = 1
@@ -330,15 +340,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="Panel/IncorrectLabel"]
+position = Vector2( -29.3669, 57.0004 )
+texture = ExtResource( 44 )
+
 [node name="CorrectLabel" type="Label" parent="Panel"]
-margin_left = 1466.69
-margin_top = -711.066
-margin_right = 1605.69
-margin_bottom = -635.066
+margin_left = 1450.0
+margin_top = -700.0
+margin_right = 1589.0
+margin_bottom = -609.0
 custom_fonts/font = ExtResource( 14 )
 text = "0"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Panel/CorrectLabel"]
+position = Vector2( 156.088, 38.964 )
+texture = ExtResource( 45 )
 
 [node name="AnchorPoints" type="Node" parent="."]
 script = ExtResource( 5 )

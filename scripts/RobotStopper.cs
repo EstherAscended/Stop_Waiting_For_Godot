@@ -4,7 +4,7 @@ using System;
 public class RobotStopper : Node
 {
     private GameManager gameManager;
-    private AnimatedSprite belt, monitorAnim; 
+    private AnimatedSprite belt, monitorAnim;
     private AudioStreamPlayer beltSound, monitorCorrect, monitorIncorrect;
     private Desk desk;
     
