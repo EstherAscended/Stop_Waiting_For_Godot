@@ -9,6 +9,7 @@ public class Robot : KinematicBody2D
     public string[] Answers = new string[6];
     public bool CanRobotMove = true;
     public bool FlaggedForDestroy = false;
+    public AudioStreamPlayer RobotVoice;
     
     //Whether or not a robot is sentient will be determined by loading the Robot or SentientRobot scene
     [Export] public bool IsSentient = false;
@@ -31,6 +32,7 @@ public class Robot : KinematicBody2D
         spawnPos = GetNode<Node2D>("../AnchorPoints/RobotSpawn");
         centerPos = GetNode<Node2D>("../AnchorPoints/RobotCenter");
         despawnPos = GetNode<Node2D>("../AnchorPoints/RobotDespawn");
+        RobotVoice = GetNode<AudioStreamPlayer>("RobotVoice");
         Position = spawnPos.Position;
         
         if (IsSentient)

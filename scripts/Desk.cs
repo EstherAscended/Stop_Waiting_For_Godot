@@ -58,8 +58,6 @@ public class Desk : Panel
         {
             HandleAfterPress(0);
         }
-        GD.Print("0");
-        GD.Print(gameManager.CurrentRobot.Answers[0]);
     }
     
     public void OnQuestion1()
@@ -68,8 +66,6 @@ public class Desk : Panel
         {
            HandleAfterPress(1);
         }
-        GD.Print("1");
-        GD.Print(gameManager.CurrentRobot.Answers[1]);
     }
     
     public void OnQuestion2()
@@ -78,8 +74,6 @@ public class Desk : Panel
         {
            HandleAfterPress(2);
         }
-        GD.Print("2");
-        GD.Print(gameManager.CurrentRobot.Answers[2]);
     }
     
     public void OnQuestion3()
@@ -88,8 +82,6 @@ public class Desk : Panel
         {
            HandleAfterPress(3);
         }
-        GD.Print("3");
-        GD.Print(gameManager.CurrentRobot.Answers[3]);
     }
     
     public void OnQuestion4()
@@ -98,8 +90,6 @@ public class Desk : Panel
         {
            HandleAfterPress(4);
         }
-        GD.Print("4");
-        GD.Print(gameManager.CurrentRobot.Answers[4]);
     }
     
     public void OnQuestion5()
@@ -108,8 +98,6 @@ public class Desk : Panel
         {
            HandleAfterPress(5);
         }
-        GD.Print("5");
-        GD.Print(gameManager.CurrentRobot.Answers[5]);
     }
 
     public void OnStart()

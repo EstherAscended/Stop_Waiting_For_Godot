@@ -11,5 +11,5 @@ dest_files=[ "res://.import/robot2.ogg-75d5de6ad8c3856f24fe70ad83ec4b13.oggstr" 
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
